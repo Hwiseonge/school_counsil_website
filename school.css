@@ -1,0 +1,320 @@
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
+body {
+  font-family: 'Jua', sans-serif;
+  margin: 0;
+  background-color: #ffe6f0;
+  color: #333;
+}
+
+.top-header {
+  background-color: #ff69b4;
+  color: white;
+  padding: 15px 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.title-banner {
+  background-color: #ffc0cb;
+  padding: 50px 20px;
+  text-align: center;
+  color: white;
+  font-size: 36px;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.title-banner {
+  padding: 0; /* 기존 padding 제거 */
+  height: 260px; /* 높이 명확히 지정 */
+  overflow: hidden;
+}
+
+
+.menu-bar {
+  background-color: #fff0f5;
+  padding: 10px 0;
+  border-bottom: 3px dashed #ffa07a;
+}
+
+.menu-bar ul {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-bar a {
+  text-decoration: none;
+  color: #333;
+  background-color: #ffd700;
+  padding: 8px 20px;
+  border-radius: 20px;
+  transition: all 0.3s;
+}
+
+.menu-bar a:hover {
+  background-color: #ffb347;
+}
+
+.main-cards {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 30px 20px;
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 15px;
+  width: 200px;
+  height: 120px;
+  margin: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+}
+
+.event-video {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 30px 20px;
+}
+
+.event, .video {
+  width: 45%;
+  min-width: 280px;
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+.event-img {
+  background-color: #ffe5b4;
+  height: 180px;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.video iframe {
+  width: 100%;
+  height: 180px;
+  border-radius: 10px;
+}
+
+.gallery {
+  padding: 30px 20px;
+  background-color: #fffaf0;
+}
+
+.gallery h2 {
+  text-align: center;
+  margin-bottom: 15px;
+  color: #ff69b4;
+}
+
+.photo-row {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.photo {
+  width: 30%;
+  min-width: 100px;
+  height: 100px;
+  background-color: #add8e6;
+  border-radius: 10px;
+}
+
+.opinion-section {
+  padding: 30px 20px;
+  background-color: #fff0f5;
+}
+
+.opinion-section h2 {
+  color: #ff1493;
+}
+
+textarea {
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 2px dashed #ff69b4;
+  resize: none;
+  font-size: 16px;
+}
+
+button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #ff69b4;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #ff1493;
+}
+
+@media (max-width: 768px) {
+  .main-cards,
+  .event-video,
+  .photo-row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card,
+  .event,
+  .video,
+  .photo {
+    width: 90% !important;
+    margin: 10px 0;
+  }
+
+  .menu-bar ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .menu-bar a {
+    display: block;
+    width: 80%;
+    text-align: center;
+  }
+
+  .title-banner {
+    font-size: 28px;
+    padding: 30px 10px;
+  }
+
+  textarea {
+    font-size: 14px;
+  }
+
+  .top-header {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+
+.slider-wrapper {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.slider {
+  display: flex;
+  width: 300%;
+  height: 100%;
+  animation: slideAnimation 30s infinite; /* 전체 30초로 아주 느리게 */
+}
+
+.slide {
+  flex: 1 0 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 36px;
+  color: white;
+  font-weight: bold;
+}
+
+/* 각 슬라이드별 배경색 */
+.slide:nth-child(1) {
+  background-color: #ff69b4;
+}
+.slide:nth-child(2) {
+  background-color: #ffa07a;
+}
+.slide:nth-child(3) {
+  background-color: #ffb6c1;
+}
+
+/* 천천히 슬라이드 애니메이션 */
+@keyframes slideAnimation {
+  0%   { transform: translateX(0%); }
+  33.33%  { transform: translateX(0%); }
+
+  36.66%  { transform: translateX(-100%); }
+  66.66%  { transform: translateX(-100%); }
+
+  69.99%  { transform: translateX(-200%); }
+  99.99%  { transform: translateX(-200%); }
+
+  100% { transform: translateX(0%); }
+}
+
+
+@media (max-width: 768px) {
+  .main-cards,
+  .event-video,
+  .photo-row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card,
+  .event,
+  .video,
+  .photo {
+    width: 90% !important;
+    margin: 10px 0;
+  }
+
+  /* 삭제해도 되는 메뉴바 관련 */
+  .menu-bar ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .menu-bar a {
+    display: block;
+    width: 80%;
+    text-align: center;
+  }
+
+  /* 타이틀 배너 내 슬라이드 글자 크기 조정 */
+  .title-banner {
+    font-size: 20px;
+    height: 100px;
+    padding: 0;
+  }
+
+  .slide {
+    font-size: 20px; /* 모바일에서는 작게 */
+  }
+
+  .slider {
+    animation: slideAnimation 30s infinite;
+    height: 100%;
+  }
+
+  textarea {
+    font-size: 14px;
+  }
+
+  .top-header {
+    flex-direction: column;
+    text-align: center;
+  }
+}
