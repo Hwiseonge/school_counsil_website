@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>QnA - 자치회에게 말해줘</title>
+  <style>
+    body { font-family: sans-serif; padding: 30px; }
+    textarea { width: 100%; height: 100px; margin-top: 10px; }
+    .qna-section { margin-bottom: 40px; }
+    .qna-box { border: 1px solid #ccc; padding: 15px; margin-bottom: 10px; border-radius: 8px; }
+    .admin-form textarea { height: 60px; }
+    .btn { margin-top: 10px; }
+    form { margin-top: 10px; }
+    .answer-meta { font-size: 14px; color: gray; }
+    a.back { display:inline-block; margin-top:20px; text-decoration: none; color: #333; }
+  </style>
+</head>
+<body>
+  <h1>💬 자치회에게 말해줘</h1>
+
+  {% if role == 'student' %}
+    <div class="qna-section">
+      <h3>🙋 질문 등록</h3>
+      <form method="POST">
+        <textarea name="question" placeholder="자유롭게 질문을 작성해주세요." required></textarea>
+        <br>
+        <button type="submit" class="btn">질문 등록</button>
+      </form>
+      <a href="/" class="back">⬅ 뒤로 가기</a>
+    </div>
+  {% endif %}
+
+  {% if role == 'admin' %}
+    <a href="/" class="back">⬅ 뒤로 가기</a>
+  {% endif %}
+
+  {% if unanswered %}
+    <div class="qna-section">
+      <h2>📌 답변 대기 질문</h2>
+      {% for q in unanswered %}
+        <div class="qna-box">
+          <p><strong>질문:</strong> {{ q.question }}</p>
+          {% if role == 'admin' %}
+            <form method="POST" action="/answer/{{ loop.index0 }}" class="admin-form">
+              <textarea name="answer" placeholder="답변 작성"></textarea><br>
+              <label>
+                답변 주체:
+                <select name="answered_by">
+                  <option value="학생자치회" style="color:blue">학생자치회</option>
+                  <option value="총무기획부">총무기획부🧾</option>
+                  <option value="학습상담부">학습상담부🗨️</option>
+                  <option value="생활안전부">생활안전부</option>
+                  <option value="환경봉사부">환경봉사부</option>
+                  <option value="문화예술부">문화예술부</option>
+                  <option value="자치홍보부">자치홍보부</option>
+                  <option value="체육건강부">체육건강부</option>
+                  <option value="학생복지부">학생복지부</option>
+                  <option value="학생회장">학생회장</option>
+                  <option value="학생부회장">학생부회장</option>
+                  
+                </select>
+              </label><br>
+              <button type="submit" class="btn">답변 등록</button>
+            </form>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {% if answered %}
+    <div class="qna-section">
+      <h2>✅ 답변 완료</h2>
+      {% for q in answered %}
+        <div class="qna-box">
+          <p><strong>질문:</strong> {{ q.question }}</p>
+          <p><strong>답변:</strong> {{ q.answer }}</p>
+          <p class="answer-meta" style="color:grey">답변자: {{ q.answered_by }}</p>
+          {% if role == 'admin' %}
+            <form method="POST" action="/delete/{{ loop.index0 }}" onsubmit="return confirm('정말로 이 질문을 삭제하시겠습니까?');">
+              <button type="submit" class="btn">삭제</button>
+            </form>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+</body>
+</html>
