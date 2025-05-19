@@ -2,40 +2,128 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>원주여자고등학교 학생자치회</title>
-  <style>
-    body { font-family: sans-serif; margin: 0; padding: 30px; }
-    header { background-color: #f5f5f5; padding: 20px; }
-    nav a { margin-right: 20px; text-decoration: none; font-weight: bold; }
-    section { margin-top: 30px; }
-    .qna-box { border: 1px solid #ddd; padding: 15px; border-radius: 8px; margin-bottom: 10px; }
-    .login-form { float: right; margin-top: -50px; }
-    textarea { width: 100%; height: 100px; }
-  </style>
+  <title>제80대 학생자치회</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='school.css') }}">
 </head>
 <body>
-  <header>
-    <h1>🎓 원주여자고등학교 학생자치회 홈페이지</h1>
-    <div class="login-form">
-      {% if session.get("username") %}
-        <p>관리자님, 환영합니다. <a href="/logout">로그아웃</a></p>
-      {% else %}
-        <form method="POST" action="/login">
-          <input type="text" name="username" placeholder="아이디" required>
-          <input type="password" name="password" placeholder="비밀번호" required>
-          <button type="submit">관리자 로그인</button>
-        </form>
-      {% endif %}
+
+<header class="top-header">
+  <div class="logo-area">원주여자고등학교</div>
+
+  <div class="login-form">
+    {% if session.get("username") %}
+      <p>관리자님, 환영합니다. <a href="{{ url_for('logout') }}">로그아웃</a></p>
+    {% else %}
+      <form method="POST" action="{{ url_for('login') }}">
+        <input type="text" name="username" placeholder="아이디" required>
+        <input type="password" name="password" placeholder="비밀번호" required>
+        <button type="submit">관리자 로그인</button>
+      </form>
+    {% endif %}
+  </div>
+</header>
+
+<nav>
+  <a href="/qna">QnA 질문하러 가기</a>
+  <a href="#">학교 소개</a>
+</nav>
+
+<section class="title-banner">
+  <div class="slider-wrapper">
+    <div class="slider">
+      <div class="slide">제 80대 학생자치회</div>
+      <div class="slide">모두가 함께 만드는 학교</div>
+      <div class="slide">원주여고 학생들의 목소리</div>
     </div>
-  </header>
+  </div>
+</section>
 
-  <nav>
-    <a href="/qna">QnA 질문하러 가기</a>
-    <a href="#">학교 소개</a>
-  </nav>
+<section class="main-cards">
 
-  <section class="opinion-section">
-    <h2>📌 자치회에게 말해줘</h2>
+  <div id="news">
+    <h3 style="text-align:center;">자치회 소식</h3>
+    {% if images.news %}
+      <img src="{{ url_for('static', filename='uploads/' + images.news) }}" alt="자치회 소식 사진" style="max-width:100%;">
+    {% endif %}
+    <!-- <div class="card">자치회 소식</div> -->
+
+    {% if role == "admin" %}
+      <button onclick="toggleUploadForm('news')">사진 올리기</button>
+      <form id="upload_news" class="upload-form" method="POST" action="{{ url_for('upload_image') }}" enctype="multipart/form-data" style="display:none;">
+        <input type="hidden" name="section" value="news">
+        <input type="file" name="image" accept="image/*" required>
+        <button type="submit">업로드</button>
+      </form>
+    {% endif %}
+  </div>
+
+  <div id="schedule">
+    <h3 style="text-align:center;">행사 일정</h3>
+    {% if images.schedule %}
+      <img src="{{ url_for('static', filename='uploads/' + images.schedule) }}" alt="행사 일정 사진" style="max-width:100%;">
+    {% endif %}
+    <!-- <div class="card">행사 일정</div> -->
+
+    {% if role == "admin" %}
+      <button onclick="toggleUploadForm('schedule')">사진 올리기</button>
+      <form id="upload_schedule" class="upload-form" method="POST" action="{{ url_for('upload_image') }}" enctype="multipart/form-data" style="display:none;">
+        <input type="hidden" name="section" value="schedule">
+        <input type="file" name="image" accept="image/*" required>
+        <button type="submit">업로드</button>
+      </form>
+    {% endif %}
+  </div>
+
+  <div id="intro">
+    <h3 style="text-align:center;">자치회 소개</h3>
+    {% if images.intro %}
+      <img src="{{ url_for('static', filename='uploads/' + images.intro) }}" alt="자치회 소개 사진" style="max-width:100%;">
+    {% endif %}
+    <!-- <div class="card">자치회 소개</div> -->
+
+    {% if role == "admin" %}
+      <button onclick="toggleUploadForm('intro')">사진 올리기</button>
+      <form id="upload_intro" class="upload-form" method="POST" action="{{ url_for('upload_image') }}" enctype="multipart/form-data" style="display:none;">
+        <input type="hidden" name="section" value="intro">
+        <input type="file" name="image" accept="image/*" required>
+        <button type="submit">업로드</button>
+      </form>
+    {% endif %}
+  </div>
+
+  <div id="mascot">
+    <h3 style="text-align:center;">마스코트</h3>
+    {% if images.mascot %}
+      <img src="{{ url_for('static', filename='uploads/' + images.mascot) }}" alt="마스코트 사진" style="max-width:100%;">
+    {% endif %}
+    <!-- <div class="card">마스코트</div> -->
+
+    {% if role == "admin" %}
+      <button onclick="toggleUploadForm('mascot')">사진 올리기</button>
+      <form id="upload_mascot" class="upload-form" method="POST" action="{{ url_for('upload_image') }}" enctype="multipart/form-data" style="display:none;">
+        <input type="hidden" name="section" value="mascot">
+        <input type="file" name="image" accept="image/*" required>
+        <button type="submit">업로드</button>
+      </form>
+    {% endif %}
+  </div>
+
+</section>
+
+<section class="event-video">
+  <div class="event">
+    <h2>이번 달 행사</h2>
+    <div class="event-img">[행사 이미지]</div>
+  </div>
+  <div class="video">
+    <h2>소개 영상</h2>
+    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+  </div>
+</section>
+
+<section class="opinion-section">
+  <h2>📌 자치회에게 말해줘</h2>
+  <div id="swered-box" style="overflow-y: scroll; height: 500px;">
     {% if answered_qna %}
       {% for q in answered_qna %}
         <div class="qna-box">
@@ -46,6 +134,18 @@
     {% else %}
       <p>아직 답변된 질문이 없습니다.</p>
     {% endif %}
-  </section>
+  </div>
+</section>
+
+<script>
+function toggleUploadForm(section) {
+  const form = document.getElementById('upload_' + section);
+  if (form.style.display === "none") {
+    form.style.display = "block";
+  } else {
+    form.style.display = "none";
+  }
+}
+</script>
 </body>
 </html>
