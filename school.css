@@ -31,7 +31,6 @@ body {
   overflow: hidden;
 }
 
-
 .menu-bar {
   background-color: #fff0f5;
   padding: 10px 0;
@@ -137,13 +136,24 @@ body {
 }
 
 .opinion-section {
-  padding: 30px 20px;
+  max-width: 600px;   /* 섹션 전체 최대 너비 조정 */
+  margin: 0 auto; 
+   padding: 30px 20px;
   background-color: #fff0f5;
+  border: 3px  dotted black;
+  border-radius: 10px;    /* 가운데 정렬 */
 }
 
-.opinion-section h2 {
-  color: #ff1493;
+#swered-box {
+  width: 100%;        /* 섹션 너비에 맞춰 가득 채움 */
+  max-width: 580px;   /* 실제 내용 영역 최대 너비 */
+  overflow-y: scroll;
+  height: 500px;
+ 
+  padding: 10px;
+  box-sizing: border-box;
 }
+
 
 textarea {
   width: 100%;
@@ -170,50 +180,6 @@ button:hover {
   background-color: #ff1493;
 }
 
-@media (max-width: 768px) {
-  .main-cards,
-  .event-video,
-  .photo-row {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .card,
-  .event,
-  .video,
-  .photo {
-    width: 90% !important;
-    margin: 10px 0;
-  }
-
-  .menu-bar ul {
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .menu-bar a {
-    display: block;
-    width: 80%;
-    text-align: center;
-  }
-
-  .title-banner {
-    font-size: 28px;
-    padding: 30px 10px;
-  }
-
-  textarea {
-    font-size: 14px;
-  }
-
-  .top-header {
-    flex-direction: column;
-    text-align: center;
-  }
-}
-
-
 .slider-wrapper {
   width: 100%;
   height: 100%;
@@ -224,29 +190,29 @@ button:hover {
   display: flex;
   width: 300%;
   height: 100%;
-  animation: slideAnimation 30s infinite; /* 전체 30초로 아주 느리게 */
+  animation: slideAnimation 10s infinite; /* 전체 30초로 아주 느리게 */
 }
 
 .slide {
-  flex: 1 0 100%;
+  flex: 2 0 80%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 36px;
-  color: white;
+  color: rgb(0, 0, 0);
   font-weight: bold;
 }
 
 /* 각 슬라이드별 배경색 */
 .slide:nth-child(1) {
-  background-color: #ff69b4;
+  background-color: #ffc8e3;
 }
 .slide:nth-child(2) {
-  background-color: #ffa07a;
+  background-color: #ff7741;
 }
 .slide:nth-child(3) {
-  background-color: #ffb6c1;
+  background-color: #ffecef;
 }
 
 /* 천천히 슬라이드 애니메이션 */
@@ -263,58 +229,133 @@ button:hover {
   100% { transform: translateX(0%); }
 }
 
-
-@media (max-width: 768px) {
-  .main-cards,
-  .event-video,
-  .photo-row {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .card,
-  .event,
-  .video,
-  .photo {
-    width: 90% !important;
-    margin: 10px 0;
-  }
-
-  /* 삭제해도 되는 메뉴바 관련 */
-  .menu-bar ul {
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .menu-bar a {
-    display: block;
-    width: 80%;
-    text-align: center;
-  }
-
-  /* 타이틀 배너 내 슬라이드 글자 크기 조정 */
-  .title-banner {
-    font-size: 20px;
-    height: 100px;
-    padding: 0;
-  }
-
-  .slide {
-    font-size: 20px; /* 모바일에서는 작게 */
-  }
-
-  .slider {
-    animation: slideAnimation 30s infinite;
-    height: 100%;
-  }
-
-  textarea {
-    font-size: 14px;
-  }
-
-  .top-header {
-    flex-direction: column;
-    text-align: center;
-  }
+.qna-box {
+  background-color: white;
 }
+
+/* ===== 여기에 내가 추가한 가로 정렬 스타일 ===== */
+
+.image-section {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap; /* 줄바꿈 가능 */
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.image-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  padding: 10px;
+  width: 320px;
+  text-align: center;
+}
+
+.image-card h3 {
+  margin: 10px 0;
+  color: #4a76a8;
+  font-weight: 600;
+}
+
+.image-card img {
+  width: 300px;
+  height: 300px;
+  object-fit: contain;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.qna-section {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.qna-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  padding: 15px;
+  width: 320px;
+  box-sizing: border-box;
+  color: #333;
+}
+
+.qna-card strong {
+  color: #4a76a8;
+}
+
+.qna-card em {
+  color: #666;
+  font-size: 0.9em;
+  margin-top: 8px;
+  display: block;
+}
+
+.user-info {
+  margin-bottom: 25px;
+  font-size: 1.1em;
+  color: #555;
+}
+
+a {
+  color: #4a76a8;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+form.upload-form {
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  width: 340px;
+  margin: 0 auto 50px;
+  text-align: center;
+}
+
+form.upload-form select,
+form.upload-form input[type="file"],
+form.upload-form button {
+  margin: 10px 0;
+  width: 90%;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+form.upload-form button {
+  background-color: #4a76a8;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+form.upload-form button:hover {
+  background-color: #3a5d7a;
+}
+
+.main-cards {
+  display: flex;          /* 가로로 나열 */
+  overflow-x: auto;       /* 가로 스크롤 허용 */
+  gap: 20px;              /* 카드 사이 간격 */
+  padding: 10px;
+  scroll-behavior: smooth; /* 스크롤 부드럽게 */
+  -webkit-overflow-scrolling: touch; /* 터치 기기 부드러운 스크롤 */
+}
+
+.main-cards > div {
+  flex: 0 0 300px;        /* 각 카드 고정 너비 300px */
+  background-color: #f8f8f8;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
