@@ -6,31 +6,36 @@ body {
   background-color: #ffe6f0;
   color: #333;
 }
-
+.login-form{
+  font-size: 20px;
+}
+.logo-area{
+  font-size: 25px;
+}
+/* 상단 헤더 */
 .top-header {
-  background-color: #ff69b4;
-  color: white;
+  background-color: #ffa4d1;
+  color: rgb(255, 255, 255);
   padding: 15px 20px;
-  font-size: 18px;
+  font-size: 10px;
   font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
+/* 타이틀 배너 */
 .title-banner {
   background-color: #ffc0cb;
-  padding: 50px 20px;
-  text-align: center;
-  color: white;
-  font-size: 36px;
-  font-weight: bold;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-.title-banner {
-  padding: 0; /* 기존 padding 제거 */
-  height: 260px; /* 높이 명확히 지정 */
+  height: 260px;
   overflow: hidden;
+  text-align: center;
+  color: rgb(0, 0, 0);
+  font-size: 16px;
+  font-weight: bold;
 }
 
+/* 메뉴 바 */
 .menu-bar {
   background-color: #fff0f5;
   padding: 10px 0;
@@ -51,115 +56,93 @@ body {
   color: #333;
   background-color: #ffd700;
   padding: 8px 20px;
-  border-radius: 20px;
-  transition: all 0.3s;
+  transition: background-color 0.3s;
 }
 
 .menu-bar a:hover {
   background-color: #ffb347;
 }
 
+/* 메인 카드 */
 .main-cards {
   display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  padding: 30px 20px;
+  overflow-x: auto;           /* 가로 스크롤 */
+  gap: 20px;
+  padding: 20px;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch; /* 모바일 부드러운 스크롤 */
+  scroll-snap-type: x mandatory;     /* 스크롤 스냅 */
 }
 
-.card {
+.main-cards > div {
+  flex: 0 0 200px;            /* 고정 너비 */
   background-color: #ffffff;
-  border-radius: 15px;
-  width: 200px;
-  height: 120px;
-  margin: 10px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 18px;
+  padding: 15px;
+  border: 1px solid #000000;
+  border-radius: 10px;        /* 둥근 모서리 */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-sizing: border-box;
+  scroll-snap-align: start;   /* 스냅 정렬 */
 }
 
+img {
+ width:200px;
+  border-radius: 20px;
+  display: block;
+  margin: 0 auto;
+}
+
+
+/* 행사/영상 */
 .event-video {
   display: flex;
-  justify-content: space-around;
   flex-wrap: wrap;
+  gap: 20px;
   padding: 30px 20px;
 }
 
 .event, .video {
-  width: 45%;
+  flex: 1;
   min-width: 280px;
   background-color: #fff;
-  border-radius: 15px;
   padding: 15px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  margin-bottom: 20px;
+  border: 1px solid #ddd;
 }
 
 .event-img {
   background-color: #ffe5b4;
   height: 180px;
-  border-radius: 10px;
   margin-top: 10px;
 }
 
 .video iframe {
   width: 100%;
   height: 180px;
-  border-radius: 10px;
 }
 
-.gallery {
-  padding: 30px 20px;
-  background-color: #fffaf0;
-}
-
-.gallery h2 {
-  text-align: center;
-  margin-bottom: 15px;
-  color: #ff69b4;
-}
-
-.photo-row {
-  display: flex;
-  gap: 15px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.photo {
-  width: 30%;
-  min-width: 100px;
-  height: 100px;
-  background-color: #add8e6;
-  border-radius: 10px;
-}
-
+/* 의견 섹션 */
 .opinion-section {
-  max-width: 600px;   /* 섹션 전체 최대 너비 조정 */
-  margin: 0 auto; 
-   padding: 30px 20px;
-  background-color: #fff0f5;
-  border: 3px  dotted black;
-  border-radius: 10px;    /* 가운데 정렬 */
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 30px 20px;
+  background-color: #ffffff;
+  border: 3px solid black;
+  margin-bottom: 20px;
 }
 
 #swered-box {
-  width: 100%;        /* 섹션 너비에 맞춰 가득 채움 */
-  max-width: 580px;   /* 실제 내용 영역 최대 너비 */
+  width: 100%;
+  max-width: 580px;
   overflow-y: scroll;
   height: 500px;
- 
   padding: 10px;
   box-sizing: border-box;
 }
-
 
 textarea {
   width: 100%;
   height: 100px;
   padding: 10px;
-  border-radius: 10px;
   border: 2px dashed #ff69b4;
   resize: none;
   font-size: 16px;
@@ -171,115 +154,82 @@ button {
   background-color: #ff69b4;
   color: white;
   border: none;
-  border-radius: 30px;
   font-size: 16px;
   cursor: pointer;
+  border-radius: 6px;
 }
 
 button:hover {
-  background-color: #ff1493;
+  background-color: #df1380;
 }
 
+/* 슬라이드 */
 .slider-wrapper {
   width: 100%;
   height: 100%;
   overflow: hidden;
 }
 
-.slider {
-  display: flex;
-  width: 300%;
-  height: 100%;
-  animation: slideAnimation 10s infinite; /* 전체 30초로 아주 느리게 */
-}
-
 .slide {
-  flex: 2 0 80%;
-  height: 100%;
+  flex: 0 0 25%; /* 4개의 슬라이드니까 25% */
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 36px;
-  color: rgb(0, 0, 0);
+  font-size: 35px;
+    -webkit-text-stroke: 0.2px black; /* 윤곽선 두께와 색 */
+     text-shadow:
+    -0.5px -0.5px 0 black,
+     0.5px -0.5px 0 black,
+    -0.5px  0.5px 0 black,
+     0.5px  0.5px 0 black;
+  color: rgb(255, 255, 255);
   font-weight: bold;
 }
 
-/* 각 슬라이드별 배경색 */
-.slide:nth-child(1) {
-  background-color: #ffc8e3;
-}
-.slide:nth-child(2) {
-  background-color: #ff7741;
-}
-.slide:nth-child(3) {
-  background-color: #ffecef;
+.slider {
+  display: flex;
+  width: 400%; /* 슬라이드 4개니까 400% */
+  height: 100%;
+  animation: slideAnimation 12s infinite; /* forwards로 마지막 프레임 유지 */
 }
 
-/* 천천히 슬라이드 애니메이션 */
+.slide:nth-child(1) { 
+  background-image:linear-gradient(to bottom, #ffe6f0 3%, rgba(255, 255, 255, 0) 20%),
+   url('원여고운동장.jpg'); /* 이미지 경로 */
+  background-size:cover; /* 이미지가 요소 크기에 맞게 채워짐 */
+  background-position: center; /* 가운데 정렬 */}
+
+.slide:nth-child(2) { 
+  background-image:linear-gradient(to bottom, #ffe6f0 3%, rgba(255, 255, 255, 0) 20%),
+   url('원여고운동장.jpg'); /* 이미지 경로 */
+  background-size: cover; /* 이미지가 요소 크기에 맞게 채워짐 */
+  background-position: center; /* 가운데 정렬 */}
+
+.slide:nth-child(3) { 
+  background-image:linear-gradient(to bottom, #ffe6f0 3%, rgba(255, 255, 255, 0) 20%),
+   url('원여고운동장.jpg'); /* 이미지 경로 */
+  background-size: cover; /* 이미지가 요소 크기에 맞게 채워짐 */
+  background-position: center; /* 가운데 정렬 */}
+
+.slide:nth-child(4) { 
+  background-image: linear-gradient(to bottom, #ffe6f0 3%, rgba(255, 255, 255, 0) 20%),
+  url('원여고운동장.jpg'); /* 이미지 경로 */
+  background-size: cover; /* 이미지가 요소 크기에 맞게 채워짐 */
+  background-position: center; /* 가운데 정렬 */
+}
 @keyframes slideAnimation {
-  0%   { transform: translateX(0%); }
-  33.33%  { transform: translateX(0%); }
-
-  36.66%  { transform: translateX(-100%); }
-  66.66%  { transform: translateX(-100%); }
-
-  69.99%  { transform: translateX(-200%); }
-  99.99%  { transform: translateX(-200%); }
-
-  100% { transform: translateX(0%); }
+  0%, 10% { transform: translateX(0); }        /* 1번 */
+  15%, 45% { transform: translateX(-25%); }   /* 2번 */
+  50%, 80% { transform: translateX(-50%); }   /* 3번 */
+  85%, 100% { transform: translateX(-75%); }  /* 4번 */
 }
 
-.qna-box {
-  background-color: white;
-}
-
-/* ===== 여기에 내가 추가한 가로 정렬 스타일 ===== */
-
-.image-section {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap; /* 줄바꿈 가능 */
-  justify-content: center;
-  margin-bottom: 40px;
-}
-
-.image-card {
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 0 8px rgba(0,0,0,0.1);
-  padding: 10px;
-  width: 320px;
-  text-align: center;
-}
-
-.image-card h3 {
-  margin: 10px 0;
-  color: #4a76a8;
-  font-weight: 600;
-}
-
-.image-card img {
-  width: 300px;
-  height: 300px;
-  object-fit: contain;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.qna-section {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
+/* QnA 카드 */
 .qna-card {
   background: white;
-  border-radius: 8px;
-  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  border: 1px solid #ddd;
   padding: 15px;
   width: 320px;
-  box-sizing: border-box;
   color: #333;
 }
 
@@ -294,26 +244,11 @@ button:hover {
   display: block;
 }
 
-.user-info {
-  margin-bottom: 25px;
-  font-size: 1.1em;
-  color: #555;
-}
-
-a {
-  color: #4a76a8;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
+/* 업로드 폼 */
 form.upload-form {
   background: white;
   padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  border: 1px solid #ddd;
   width: 340px;
   margin: 0 auto 50px;
   text-align: center;
@@ -325,9 +260,7 @@ form.upload-form button {
   margin: 10px 0;
   width: 90%;
   padding: 8px;
-  border-radius: 4px;
   border: 1px solid #ccc;
-  box-sizing: border-box;
 }
 
 form.upload-form button {
@@ -335,27 +268,10 @@ form.upload-form button {
   color: white;
   border: none;
   cursor: pointer;
-  font-weight: 600;
 }
 
 form.upload-form button:hover {
   background-color: #3a5d7a;
 }
 
-.main-cards {
-  display: flex;          /* 가로로 나열 */
-  overflow-x: auto;       /* 가로 스크롤 허용 */
-  gap: 20px;              /* 카드 사이 간격 */
-  padding: 10px;
-  scroll-behavior: smooth; /* 스크롤 부드럽게 */
-  -webkit-overflow-scrolling: touch; /* 터치 기기 부드러운 스크롤 */
-}
-
-.main-cards > div {
-  flex: 0 0 300px;        /* 각 카드 고정 너비 300px */
-  background-color: #f8f8f8;
-  border-radius: 8px;
-  padding: 15px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
 
