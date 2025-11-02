@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>{{ section }} 상세보기</title>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 40px; background:#f9f9f9; color:#333; }
+    .container { max-width: 800px; margin: auto; background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);}
+    h1 { text-align: center; margin-bottom: 20px;}
+    .image-scroll { display: flex; overflow-x: auto; gap: 10px; padding: 10px 0;}
+    .image-item img { height: 400px; border-radius: 8px; border: 3px solid transparent; }
+    .representative { border-color: #fb10ff !important; }
+    p { white-space: pre-line; margin-top: 20px;}
+    .back-btn { display:inline-block; padding: 6px 12px; background:#fb10ff; color:white; border-radius: 5px; text-decoration:none; margin-bottom: 15px;}
+    .back-btn:hover { background:#b30095;}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="{{ url_for('index') }}" class="back-btn">← 메인으로</a>
+    <h2>{{ section }} 상세보기</h1>
+    <hr>
+    {% if data.images %}
+      <div class="image-scroll">
+        {% for img in data.images %}
+          <div class="image-item">
+            <img src="{{ url_for('static', filename='uploads/' + img) }}"
+                 class="{% if data.representative == img %}representative{% endif %}">
+          </div>
+        {% endfor %}
+      </div>
+    {% elif data.image %}
+      <img src="{{ url_for('static', filename='uploads/' + data.image) }}" style="max-width:100%;">
+    {% endif %}
+    {% if data.text %}
+      <p>{{ data.text }}</p>
+    {% endif %}
+  </div>
+</body>
+</html>
