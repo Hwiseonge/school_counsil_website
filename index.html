@@ -4,15 +4,39 @@
   <meta charset="UTF-8">
   <title>제80대 학생자치회</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='school.css') }}">
+  <style> 
+    a {
+      color: inherit; /* 부모 요소 색상 상속 */
+      text-decoration: none; /* 밑줄 제거 */
+    }
+    h2{ 
+      text-align:center;
+    }
+
+    .qna-box{
+      
+      border-radius: 10px;
+      padding:10px;
+      margin:10px;
+      font-size: 20px;
+      background-color: rgb(255, 226, 186);
+    }
+    .g{padding:10px;
+      margin:10px;
+      font-size: 20px;
+    }
+  
+
+  </style>
 </head>
 <body>
 
 <header class="top-header">
-  <div class="logo-area">원주여자고등학교</div>
+  <div class="logo-area">원주여자고등학교 학생자치회</div>
 
   <div class="login-form">
     {% if session.get("username") %}
-      <p>관리자님, 환영합니다. <a href="{{ url_for('logout') }}">로그아웃</a></p>
+      <p>관리자님, 환영합니다. <a href="{{ url_for('logout') }}" style="color:rgb(255, 255, 255); font-size: 15px;">(로그아웃 하기)</a></p>
     {% else %}
       <form method="POST" action="{{ url_for('login') }}">
         <input type="text" name="username" placeholder="아이디" required>
@@ -23,9 +47,10 @@
   </div>
 </header>
 
-<nav>
-  <a href="/qna">QnA 질문하러 가기</a>
-  <a href="#">학교 소개</a>
+<nav style="padding:10px;">
+  <a href="/qna" class="g">QnA 질문하러 가기</a>
+  |
+  <a href="https://wonju-g.gwe.hs.kr/main.do" class="g">원주여자고등학교 공식 사이트</a>
 </nav>
 
 <section class="title-banner">
@@ -34,79 +59,108 @@
       <div class="slide">제 80대 학생자치회</div>
       <div class="slide">모두가 함께 만드는 학교</div>
       <div class="slide">원주여고 학생들의 목소리</div>
+      <div class="slide">제 80대 학생자치회</div>
     </div>
   </div>
 </section>
 
 <section class="main-cards">
 
+   <!-- 자치회 소식 -->
   <div id="news">
-    <h3 style="text-align:center;">자치회 소식</h3>
+    <h2>자치회 소식</h2>
     {% if images.news %}
-      <img src="{{ url_for('static', filename='uploads/' + images.news) }}" alt="자치회 소식 사진" style="max-width:100%;">
+      {% if images.news.representative %}
+        <img src="{{ url_for('static', filename='uploads/' + images.news.representative) }}" alt="자치회 소식 대표 이미지">
+      {% elif images.news.image %}
+        <img src="{{ url_for('static', filename='uploads/' + images.news.image) }}" alt="자치회 소식 이미지">
+      {% else %}
+      <img src="{{ url_for('static', filename='uploads/nothing.png') }}" alt=" 기본 이미지">
+      {% endif %}
     {% endif %}
-    <!-- <div class="card">자치회 소식</div> -->
-
-    {% if role == "admin" %}
-      <button onclick="toggleUploadForm('news')">사진 올리기</button>
-      <form id="upload_news" class="upload-form" method="POST" action="{{ url_for('upload_image') }}" enctype="multipart/form-data" style="display:none;">
-        <input type="hidden" name="section" value="news">
-        <input type="file" name="image" accept="image/*" required>
-        <button type="submit">업로드</button>
-      </form>
+    {% if role == 'admin' %}
+    <div style="text-align:center;">
+      <a href="{{ url_for('edit', section='news') }}"><button>수정하기</button></a>
+    </div>
     {% endif %}
+    <div style="text-align:center; margin-top: 8px;">
+      <a href="{{ url_for('show_all', section='news') }}"><button>상세보기</button></a>
+    </div>
   </div>
 
+  <br>
+
+  <!-- 행사 일정 -->
   <div id="schedule">
-    <h3 style="text-align:center;">행사 일정</h3>
+    <h2>행사 일정</h2>
     {% if images.schedule %}
-      <img src="{{ url_for('static', filename='uploads/' + images.schedule) }}" alt="행사 일정 사진" style="max-width:100%;">
+      {% if images.schedule.representative %}
+        <img src="{{ url_for('static', filename='uploads/' + images.schedule.representative) }}" alt="행사 일정 대표 이미지">
+      {% elif images.schedule.image %}
+        <img src="{{ url_for('static', filename='uploads/' + images.schedule.image) }}" alt="행사 일정 이미지">
+      {% else %}
+      <img src="{{ url_for('static', filename='uploads/nothing.png') }}" alt=" 기본 이미지">
+      {% endif %}
     {% endif %}
-    <!-- <div class="card">행사 일정</div> -->
-
-    {% if role == "admin" %}
-      <button onclick="toggleUploadForm('schedule')">사진 올리기</button>
-      <form id="upload_schedule" class="upload-form" method="POST" action="{{ url_for('upload_image') }}" enctype="multipart/form-data" style="display:none;">
-        <input type="hidden" name="section" value="schedule">
-        <input type="file" name="image" accept="image/*" required>
-        <button type="submit">업로드</button>
-      </form>
+    {% if role == 'admin' %}
+    <div style="text-align:center;">
+      <a href="{{ url_for('edit', section='schedule') }}"><button>수정하기</button></a>
+    </div>
     {% endif %}
+    <div style="text-align:center; margin-top: 8px;">
+      <a href="{{ url_for('show_all', section='schedule') }}"><button>상세보기</button></a>
+    </div>
   </div>
 
+  <br>
+
+  <!-- 자치회 소개 -->
   <div id="intro">
-    <h3 style="text-align:center;">자치회 소개</h3>
+    <h2 style="text-align:center;">자치회 소개</h2>
     {% if images.intro %}
-      <img src="{{ url_for('static', filename='uploads/' + images.intro) }}" alt="자치회 소개 사진" style="max-width:100%;">
+      {% if images.intro.representative %}
+        <img src="{{ url_for('static', filename='uploads/' + images.intro.representative) }}" alt="자치회 소개 대표 이미지" style="max-width:100%;">
+      {% elif images.intro.image %}
+        <img src="{{ url_for('static', filename='uploads/' + images.intro.image) }}" alt="자치회 소개 사진" style="max-width:100%;">
+      {% else %}
+      <img src="{{ url_for('static', filename='uploads/nothing.png') }}" alt=" 기본 이미지">
+        {% endif %}
     {% endif %}
-    <!-- <div class="card">자치회 소개</div> -->
-
-    {% if role == "admin" %}
-      <button onclick="toggleUploadForm('intro')">사진 올리기</button>
-      <form id="upload_intro" class="upload-form" method="POST" action="{{ url_for('upload_image') }}" enctype="multipart/form-data" style="display:none;">
-        <input type="hidden" name="section" value="intro">
-        <input type="file" name="image" accept="image/*" required>
-        <button type="submit">업로드</button>
-      </form>
+    <div style="text-align:center; margin-top: 8px;">
+      <a href="{{ url_for('show_all', section='intro') }}"><button>상세보기</button></a>
+    </div>
+    {% if role == 'admin' %}
+    <div style="text-align:center;">
+      <a href="{{ url_for('edit', section='intro') }}"><button>수정하기</button></a>
+    </div>
     {% endif %}
   </div>
 
+  <br>
+
+  <!-- 마스코트 -->
   <div id="mascot">
-    <h3 style="text-align:center;">마스코트</h3>
+    <h2>마스코트</h2>
     {% if images.mascot %}
-      <img src="{{ url_for('static', filename='uploads/' + images.mascot) }}" alt="마스코트 사진" style="max-width:100%;">
+     
+      {% if images.mascot.representative %}
+        <img src="{{ url_for('static', filename='uploads/' + images.mascot.representative) }}" alt="마스코트 대표 이미지">
+      {% elif images.mascot.image %}
+        <img src="{{ url_for('static', filename='uploads/' + images.mascot.image) }}" alt="마스코트 이미지">
+      {% else %}
+      <img src="{{ url_for('static', filename='uploads/nothing.png') }}" alt="마스코트 기본 이미지">
+        {% endif %}
     {% endif %}
-    <!-- <div class="card">마스코트</div> -->
-
-    {% if role == "admin" %}
-      <button onclick="toggleUploadForm('mascot')">사진 올리기</button>
-      <form id="upload_mascot" class="upload-form" method="POST" action="{{ url_for('upload_image') }}" enctype="multipart/form-data" style="display:none;">
-        <input type="hidden" name="section" value="mascot">
-        <input type="file" name="image" accept="image/*" required>
-        <button type="submit">업로드</button>
-      </form>
+    {% if role == 'admin' %}
+    <div style="text-align:center;">
+      <a href="{{ url_for('edit', section='mascot') }}"><button>수정하기</button></a>
+    </div>
     {% endif %}
+    <div style="text-align:center; margin-top: 8px;">
+      <a href="{{ url_for('show_all', section='mascot') }}"><button>상세보기</button></a>
+    </div>
   </div>
+
 
 </section>
 
